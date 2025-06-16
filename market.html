@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Un cirujano en Wall Street - Panorama Actual del Mercado</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:300,400,700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="fixed-header">
+        <div class="company-name">Un cirujano en Wall Street</div>
+        <nav class="social-links">
+            <a href="https://www.youtube.com/@albertolopezdelgado" target="_blank" aria-label="YouTube Channel"><img src="icons/youtube.png" alt="YouTube"></a>
+            <a href="https://www.instagram.com/albertolopezdelgado" target="_blank" aria-label="Instagram Profile"><img src="icons/instagram.png" alt="Instagram"></a>
+            <a href="mailto:info@yourcompany.com" aria-label="Email Us"><img src="icons/email.png" alt="Email"></a>
+        </nav>
+    </header>
+
+    <main class="content">
+        <section class="market-status">
+            <h1>Panorama Actual del Mercado</h1>
+            <p>Esta sección ofrece una visión simplificada de los principales indicadores del mercado global. Para obtener datos completos y en tiempo real, es esencial la integración con una API de datos financieros. A continuación, se presenta un ejemplo simulado para demostrar el concepto.</p>
+
+            <div class="market-data">
+                <div class="data-card">
+                    <h2>Promedio Industrial Dow Jones (DJIA)</h2>
+                    <p class="value" id="djia-value">39,123.45</p>
+                    <p class="change" id="djia-change">+150.23 (+0.38%)</p>
+                </div>
+                <div class="data-card">
+                    <h2>S&P 500</h2>
+                    <p class="value" id="sp500-value">5,321.67</p>
+                    <p class="change" id="sp500-change">-25.89 (-0.48%)</p>
+                </div>
+                <div class="data-card">
+                    <h2>NASDAQ Composite</h2>
+                    <p class="value" id="nasdaq-value">16,987.90</p>
+                    <p class="change" id="nasdaq-change">+75.12 (+0.44%)</p>
+                </div>
+                <div class="data-card">
+                    <h2>FTSE 100</h2>
+                    <p class="value" id="ftse100-value">8,154.32</p>
+                    <p class="change" id="ftse100-change">-10.50 (-0.13%)</p>
+                </div>
+            </div>
+
+            <p class="last-updated">Última actualización: <span id="update-time"></span></p>
+            <button class="button refresh-button" id="refresh-market-data">Actualizar Datos</button>
+
+            <p class="disclaimer">Descargo de responsabilidad: Los datos presentados aquí son ilustrativos y no en tiempo real. Para obtener datos de mercado reales y actualizados al minuto, consulte servicios financieros profesionales o proveedores de datos dedicados. Los datos de mercado suelen tener un retraso, a menos que la fuente indique lo contrario.</p>
+        </section>
+        <section class="back-home">
+            <a href="index.html" class="button">Volver al Inicio</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; Un cirujano en Wall Street. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
