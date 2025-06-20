@@ -581,16 +581,27 @@ footer p {
         margin-left: 20px;
     }
 
-    .fixed-header nav ul {
+    .fixed-header nav ul { /* Adjust nav on medium screens */
         margin-right: 0;
+        gap: 10px; /* Smaller gap for nav items */
+        justify-content: center; /* Center nav items */
+        width: 100%; /* Take full width for easier wrapping */
     }
 
     .fixed-header nav ul li {
-        margin-left: 15px;
+        margin-left: 0; /* Remove individual left margin */
+    }
+
+    .fixed-header nav ul li a {
+        padding: 8px 12px; /* Slightly smaller padding */
+        font-size: 0.95em;
     }
 
     .fixed-header .social-links {
         margin-right: 20px;
+        margin-top: 10px; /* Give some space if header wraps */
+        width: 100%;
+        justify-content: center;
     }
 
     .future-projects {
@@ -647,44 +658,76 @@ footer p {
     .stock-item {
         font-size: 0.9em;
         flex-wrap: wrap;
+        justify-content: space-between; /* Maintain space-between for two columns */
+        align-items: flex-start; /* Align text to start for better readability */
     }
     .stock-item .symbol, .stock-item .name {
-        flex-basis: 45%;
+        flex-basis: 45%; /* Allow two columns */
+        text-align: left;
+        margin-left: 0;
     }
     .stock-item .price, .stock-item .change {
-        flex-basis: 45%;
+        flex-basis: 45%; /* Allow two columns */
         margin-top: 5px;
+        text-align: right;
     }
 }
 
 @media (max-width: 768px) {
     .fixed-header {
         flex-direction: column;
-        padding-bottom: 10px;
+        padding: 10px; /* Reduced padding from 15px 0 to 10px */
         align-items: center;
+        position: static; /* No longer sticky on small mobile */
+        box-shadow: none; /* No shadow if not sticky */
     }
 
     .company-name {
         margin-left: 0;
-        margin-bottom: 10px;
+        margin-bottom: 10px; /* Added margin-bottom to separate from nav */
+        font-size: 1.5em; /* Smaller font size for mobile */
     }
 
     .fixed-header nav ul {
-        flex-wrap: wrap;
-        justify-content: center;
+        flex-direction: column; /* Stack nav items vertically */
+        align-items: center; /* Center them */
+        width: 100%; /* Take full width */
+        gap: 5px; /* Smaller gap */
         margin-bottom: 10px;
     }
 
     .fixed-header nav ul li {
-        margin: 5px 10px;
+        margin: 5px 0; /* Adjust margin for stacked list items */
+        width: 100%; /* Ensure each button takes full width */
+        text-align: center;
     }
 
-    .fixed-header .social-links {
-        margin-right: 0;
+    .fixed-header nav ul li a.button {
+        padding: 8px 10px;
+        font-size: 0.9em;
+        display: block; /* Make the whole area clickable */
+        width: calc(100% - 20px); /* Account for padding */
+        box-sizing: border-box;
     }
+
+    .fixed-header .social-links { /* Ensure social links are correctly aligned under nav */
+        margin-right: 0;
+        margin-top: 15px; /* Space social icons from nav */
+        justify-content: center; /* Center icons */
+        gap: 8px; /* Smaller gap for icons */
+        width: 100%;
+    }
+
+    .fixed-header .social-links img {
+        width: 25px; /* Smaller icons for mobile */
+        height: 25px;
+    }
+
 
     .content {
-        padding-top: 150px;
+        padding-top: 150px; /* Crucial: Push content down to clear the now taller, non-sticky header */
+        padding: 15px; /* General padding reduction for content */
+        margin: 15px auto; /* General margin reduction for content */
     }
 
     h2 {
@@ -773,6 +816,19 @@ footer p {
     }
     .stock-item {
         font-size: 0.85em;
+        flex-direction: column; /* Stack symbol, name, price, change vertically */
+        align-items: flex-start; /* Align text to the left */
+        padding: 8px 10px; /* Adjust padding for stacked items */
+    }
+    .stock-item .symbol, .stock-item .name,
+    .stock-item .price, .stock-item .change {
+        flex-basis: 100%; /* Each element takes full width */
+        text-align: left; /* Align text left */
+        margin-left: 0; /* Remove margin-left */
+        margin-bottom: 2px; /* Small space between stacked elements */
+    }
+    .stock-item .price, .stock-item .change {
+        margin-top: 0; /* Remove top margin */
     }
 }
 
@@ -784,6 +840,11 @@ footer p {
     .fixed-header nav ul li a {
         padding: 6px 10px;
         font-size: 0.9em;
+    }
+
+    .fixed-header .social-links img {
+        width: 20px;
+        height: 20px;
     }
 
     .grid-cell h1 {
