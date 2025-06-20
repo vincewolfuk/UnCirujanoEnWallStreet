@@ -129,6 +129,7 @@ a:hover {
     display: flex; /* Makes the icons align horizontally */
     gap: 15px; /* Adds space between social icons */
     margin-right: 30px; /* Aligns with your company name's left margin */
+    
 }
 
 .fixed-header .social-links img {
@@ -521,8 +522,8 @@ a:hover {
 
 /* Footer Styles */
 footer {
-    background-color: #333;
-    color: #f4f4f4;
+    background-color: #7b2935;
+    color: #fff;
     text-align: center;
     padding: 30px 0;
     margin-top: 50px;
@@ -553,6 +554,7 @@ footer p {
     width: 30px;
     height: 30px;
     vertical-align: middle;
+    filter: invert(100%);
 }
 
 /* Responsive Design */
