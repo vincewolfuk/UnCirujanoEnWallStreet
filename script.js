@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Tu clave API de Financial Modeling Prep (FMP)
-    const FMP_API_KEY = "nK7ZO4aVrrmKFhpqJEIFsLV77xx6Kd8x"; 
+    const FMP_API_KEY = "FMP_API_KEY"; 
 
     const stockItems = document.querySelectorAll('.stock-item');
     const updateTimeSpan = document.getElementById('update-time');
