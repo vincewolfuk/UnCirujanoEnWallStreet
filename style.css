@@ -1,502 +1,851 @@
-/* General Resets and Base Styles - Cool Edition */
-* {
+/* General Body Styles */
+body {
+    font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-}
-
-:root {
-    /* Define a darker, more modern color palette */
-    --primary-color: #2c3e50; /* Deep Midnight Blue/Charcoal */
-    --secondary-color: #3498db; /* Bright Sky Blue for accents */
-    --accent-color: #f1c40f; /* Gold/Amber for highlight */
-    --text-color: #ecf0f1; /* Light grey for body text */
-    --heading-color: #ffffff; /* White for headings */
-    --background-color: #34495e; /* Slightly lighter deep blue for main background */
-    --card-background: #2c3e50; /* Darker blue for cards */
-    --border-color: rgba(255, 255, 255, 0.1); /* Subtle white border */
-    --shadow-color: rgba(0, 0, 0, 0.4); /* Deeper shadow */
-    --positive-change: #2ecc71; /* Emerald Green */
-    --negative-change: #e74c3c; /* Alizarin Red */
-}
-
-body {
-    font-family: 'Roboto', sans-serif; /* Still a clean, modern body font */
     line-height: 1.6;
-    color: var(--text-color);
-    background-color: var(--background-color);
-    padding-top: 80px; /* Space for fixed header */
-    transition: background-color 0.5s ease;
-    scroll-behavior: smooth;
+    color: #333; /* Dark grey for good readability */
+    background-color: #f8f8f8; /* Light grey background */
 }
 
+/* Headings */
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Playfair Display', serif; /* Elegant serif for headings */
-    margin-bottom: 0.8em;
-    color: var(--heading-color);
-    line-height: 1.2;
-    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    font-family: 'Playfair Display', serif;
+    color: #222; /* Slightly darker for emphasis */
+    margin-bottom: 0.5em;
 }
 
-p {
+h1 {
+    font-size: 2.8em;
+    font-weight: 700;
+    color: #7b2935; /* Main color for primary headings */
+}
+
+h2 {
+    font-size: 2.2em;
+    font-weight: 700;
+    color: #333;
+    text-align: center;
+    margin-top: 2em;
     margin-bottom: 1em;
 }
 
+/* Links */
 a {
-    color: var(--secondary-color);
+    color: #7b2935;
     text-decoration: none;
-    transition: color 0.3s ease, transform 0.2s ease;
+    transition: color 0.3s ease;
 }
 
 a:hover {
-    color: var(--accent-color);
-    transform: translateY(-2px);
+    color: #a04351; /* Lighter shade for hover */
 }
 
-/* Fixed Header */
+/* Introduction Bubble */
+.introduction {
+    background-color: #7b2935; /* Main brand color for the bubble background */
+    border-radius: 15px; /* Rounded corners for the bubble effect */
+    padding: 30px; /* Adjust padding inside the bubble */
+    margin: 130px auto 10px auto; /* Increased top margin, reduced bottom margin, centered */
+    width: 80%; /* Maintain the width */
+    max-width: 800px; /* Optional: Limit maximum width for larger screens */
+    text-align: center; /* Center the text within the bubble */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    color: #ffffff; /* Ensure text color is white for contrast */
+}
+
+.introduction h1 {
+    color: #ffffff; /* White color for the heading inside the bubble */
+    margin-bottom: 15px; /* Space below the heading */
+}
+
+.introduction p {
+    line-height: 1.6; /* Improve readability of the paragraph */
+}
+
+/* Fixed Header Styles */
 .fixed-header {
+    background-color: #7b2935; /* Main color for header background */
+    color: #fff;
+    padding: 15px 0;
     position: fixed;
+    width: 100%;
     top: 0;
     left: 0;
-    width: 100%;
-    background: linear-gradient(to right, var(--primary-color), #1a242f); /* Subtle gradient */
-    color: var(--heading-color);
-    padding: 15px 5%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 4px 15px var(--shadow-color);
     z-index: 1000;
-    backdrop-filter: blur(5px); /* Frosted glass effect */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between; /* Spreads out company name, nav, and social links */
+    align-items: center;
+    box-sizing: border-box; /* Include padding in width */
 }
 
 .company-name {
     font-family: 'Playfair Display', serif;
     font-size: 1.8em;
     font-weight: 700;
-    color: var(--heading-color);
-    letter-spacing: 0.05em;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    margin-left: 30px;
+    letter-spacing: 0.5px;
+    color: #fff;
 }
 
-.social-links {
+.fixed-header nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
     display: flex;
-    gap: 20px;
 }
 
-.social-links a {
-    color: var(--heading-color);
-    font-size: 1.2em;
-    transition: transform 0.3s ease, color 0.3s ease;
+.fixed-header nav ul li {
+    margin-left: 25px;
 }
 
-.social-links a:hover {
-    transform: translateY(-3px) scale(1.1); /* More pronounced hover */
-    color: var(--accent-color);
+.fixed-header nav ul li a {
+    color: #fff;
+    font-weight: 400;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.social-links img {
-    width: 24px;
-    height: 24px;
-    filter: invert(1); /* Makes SVG icons white */
-    transition: filter 0.3s ease;
+.fixed-header nav ul li a.button {
+    background-color: #a04351; /* Secondary color for buttons in header */
+    border: 1px solid #a04351;
 }
 
-.social-links a:hover img {
-    filter: invert(0.8) sepia(1) saturate(5) hue-rotate(0deg); /* Changes icon color on hover */
+.fixed-header nav ul li a.button:hover {
+    background-color: #fff;
+    color: #7b2935;
+    border-color: #fff;
 }
 
-/* Main Content Area */
+.fixed-header nav ul li a:not(.button):hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+}
+
+/* Social links within header */
+.fixed-header .social-links {
+    display: flex; /* Makes the icons align horizontally */
+    gap: 15px; /* Adds space between social icons */
+    margin-right: 30px; /* Aligns with your company name's left margin */
+}
+
+.fixed-header .social-links img {
+    width: 25px; /* Adjust size as needed */
+    height: 25px;
+    filter: invert(100%); /* Keeps them white against the dark header */
+    vertical-align: middle; /* Align icons vertically */
+}
+
+
+/* Main Content Padding for Fixed Header */
 .content {
-    max-width: 1200px;
-    margin: 20px auto;
-    padding: 20px 40px;
-    background-color: var(--card-background);
-    box-shadow: 0 8px 30px var(--shadow-color); /* Deeper shadow */
-    border-radius: 12px; /* Slightly more rounded corners */
-    animation: fadeInScale 1s ease-out; /* Smooth entrance with scale */
-    border: 1px solid var(--border-color); /* Subtle border */
-}
-
-@keyframes fadeInScale {
-    from { opacity: 0; transform: translateY(30px) scale(0.98); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-section {
-    padding: 40px 0;
-    border-bottom: 1px solid var(--border-color); /* Subtle separator */
-}
-
-section:last-of-type {
-    border-bottom: none;
-}
-
-/* Hero Section */
-.hero {
-    text-align: center;
-    padding: 80px 0; /* More vertical padding */
-    background: linear-gradient(135deg, var(--secondary-color) 0%, #007bff 100%); /* Vibrant blue gradient */
-    color: var(--heading-color);
-    border-radius: 12px;
-    margin-bottom: 40px;
-    box-shadow: 0 10px 30px rgba(0, 123, 255, 0.4); /* Blue-tinted shadow */
-    position: relative; /* For subtle background patterns */
-    overflow: hidden;
-}
-
-.hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('data:image/svg+xml;utf8,<svg width="100%" height="100%" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="diagonal-stripe" patternUnits="userSpaceOnUse" width="10" height="10" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="10" stroke="%23ffffff" stroke-width="0.5" stroke-opacity="0.1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23diagonal-stripe)"/></svg>') repeat;
-    opacity: 0.1;
-    z-index: 0;
-}
-
-.hero h1 {
-    font-size: 3.5em; /* Larger heading */
-    margin-bottom: 0.5em;
-    color: var(--heading-color);
-    text-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
-    position: relative;
-    z-index: 1;
-}
-
-.hero p {
-    font-size: 1.3em; /* Larger paragraph */
-    max-width: 800px;
-    margin: 0 auto 40px auto;
-    line-height: 1.7;
-    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
-    position: relative;
-    z-index: 1;
-}
-
-.cta-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 25px; /* More space between buttons */
-    flex-wrap: wrap;
-    position: relative;
-    z-index: 1;
-}
-
-.button {
-    display: inline-block;
-    padding: 14px 30px; /* Larger padding */
-    background-color: var(--accent-color);
-    color: var(--primary-color); /* Text color from primary blue */
-    border: none;
-    border-radius: 8px; /* Slightly more rounded */
-    font-size: 1.1em; /* Larger font */
-    cursor: pointer;
-    transition: background-color 0.4s ease, transform 0.3s ease, box-shadow 0.4s ease;
-    text-decoration: none;
-    font-weight: 700;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-}
-
-.button:hover {
-    background-color: #ffda6a; /* Brighter gold on hover */
-    transform: translateY(-5px) scale(1.02); /* More pronounced lift */
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-}
-
-.refresh-button {
-    margin-top: 20px;
-}
-
-/* About Us Section (index.html) */
-.about-us {
-    text-align: center;
     padding-top: 20px;
 }
 
-.about-us h2 {
-    font-size: 2.5em;
-    margin-bottom: 1em;
+/* --- 2x2 Grid Section Styles --- */
+.two-by-two-grid-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    gap: 15px;
+    background-color: #7b2935;
+    padding: 30px;
+    max-width: 1200px;
+    margin: 50px auto;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    min-height: 600px;
 }
 
-/* Owner Biography Section (owner.html) */
+.grid-cell {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.text-cell-1, .text-cell-2 {
+    background-color: white;
+}
+
+.grid-cell h1 {
+    font-size: 2.2em;
+    line-height: 1.2;
+    margin-bottom: 10px;
+    color: #7b2935;
+}
+
+.grid-cell p {
+    font-size: 1em;
+    color: #555;
+    margin-top: 0;
+    max-width: 90%;
+}
+
+.image-cell-1, .image-cell-2 {
+    color: #fff;
+}
+
+.image-cell-1 img, .image-cell-2 img {
+    max-width: 50%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+    border-radius: 5px;
+}
+
+/* About Us Section */
+.about-us {
+    max-width: 960px;
+    margin: 50px auto;
+    padding: 40px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+.about-us p {
+    font-size: 1.1em;
+    line-height: 1.8;
+    margin-bottom: 1.5em;
+    color: #444;
+}
+
+/* Owner Bio Section Styles */
 .owner-bio {
+    max-width: 960px;
+    margin: 100px auto 50px auto;
+    padding: 40px;
+    background-color: #EAE0E1;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     text-align: center;
 }
 
 .owner-bio h1 {
-    font-size: 2.8em;
-    margin-bottom: 1em;
+    color: #7b2935;
+    font-size: 2.5em;
+    margin-bottom: 30px;
 }
 
 .owner-pic {
-    width: 220px; /* Slightly larger image */
-    height: 220px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
     object-fit: cover;
     margin-bottom: 30px;
-    border: 5px solid var(--secondary-color); /* Thicker border */
-    box-shadow: 0 6px 20px var(--shadow-color);
-    transition: transform 0.4s ease;
-}
-
-.owner-pic:hover {
-    transform: scale(1.05) rotate(3deg); /* Fun hover effect */
+    border: 5px solid #7b2935;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .owner-bio p {
-    max-width: 800px;
-    margin: 0 auto 1em auto;
-    font-size: 1.15em; /* Slightly larger text */
+    font-size: 1.1em;
     line-height: 1.8;
+    margin-bottom: 1.5em;
+    color: #444;
+    text-align: justify;
+    padding: 0 20px;
 }
 
-/* Future Projects Section (projects.html) */
-.future-projects h1 {
+.owner-bio p strong {
+    color: #333;
+}
+
+/* Future Projects Section Styles */
+.future-projects {
+    max-width: 960px;
+    margin: 100px auto 50px auto;
+    padding: 40px;
+    background-color: #fefefe;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     text-align: center;
-    font-size: 2.8em;
-    margin-bottom: 1.5em;
+}
+
+.future-projects h1 {
+    color: #7b2935;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.future-projects .intro-paragraph,
+.future-projects .closing-paragraph {
+    font-size: 1.1em;
+    line-height: 1.8;
+    color: #444;
+    max-width: 800px;
+    margin: 0 auto 30px auto;
+    text-align: justify;
+    padding: 0 20px;
 }
 
 .project-card {
-    background-color: var(--card-background);
-    border: 1px solid var(--border-color);
     border-radius: 10px;
-    padding: 30px; /* More padding */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    padding: 25px;
     margin-bottom: 30px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    text-align: left;
 }
 
-.project-card:hover {
-    transform: translateY(-8px) scale(1.01); /* More pronounced lift */
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+/* Alternating background colors for project cards */
+.project-card:nth-child(even) {
+    background-color: #F8F2F3;
 }
+
+.project-card:nth-child(odd) {
+    background-color: #f0dddf; /* User's requested color change */
+}
+
 
 .project-card h3 {
-    color: var(--secondary-color); /* Accent color for project titles */
-    font-size: 2em;
-    margin-bottom: 1em;
+    color: #7b2935;
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.project-card p {
+    font-size: 1em;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 15px;
+    text-align: justify;
+}
+
+.project-card h4 {
+    color: #333;
+    font-size: 1.2em;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    text-align: left;
 }
 
 .project-card ul {
-    list-style: disc inside;
-    margin-top: 15px;
-    padding-left: 20px;
-    color: var(--text-color);
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 15px;
 }
 
 .project-card ul li {
-    margin-bottom: 10px; /* More space for list items */
-    font-size: 1.05em;
+    font-size: 0.95em;
+    color: #666;
+    margin-bottom: 8px;
+    position: relative;
+    padding-left: 20px;
 }
 
-/* Market Status Section (market.html) */
-.market-status {
+.project-card ul li::before {
+    content: '•';
+    color: #7b2935;
+    font-size: 1.2em;
+    position: absolute;
+    left: 0;
+    top: 0;
+    line-height: 1;
+}
+
+/* Favorite Stocks Section Styles */
+.favorite-stocks {
+    max-width: 1200px;
+    margin: 100px auto 50px auto;
+    padding: 40px;
+    background-color: #fefefe;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     text-align: center;
 }
 
-.market-status h1 {
-    font-size: 2.8em;
-    margin-bottom: 1em;
+.favorite-stocks h1 {
+    color: #7b2935;
+    font-size: 2.5em;
+    margin-bottom: 20px;
 }
 
-.market-data {
+.favorite-stocks .intro-paragraph,
+.favorite-stocks .disclaimer {
+    font-size: 1.1em;
+    line-height: 1.8;
+    color: #444;
+    max-width: 900px;
+    margin: 0 auto 30px auto;
+    text-align: justify;
+    padding: 0 20px;
+}
+
+.favorite-stocks .disclaimer {
+    font-size: 0.9em;
+    color: #777;
+    margin-top: 40px;
+    text-align: center;
+}
+
+/* Loading and Error Message Styles (kept as before) */
+.loading-message, .error-message {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 8px;
+    font-weight: bold;
+    display: none; /* Hidden by default, shown by JS */
+}
+
+.loading-message {
+    background-color: #e0f7fa;
+    color: #007bb5;
+}
+
+.error-message {
+    background-color: #ffebee;
+    color: #c62828;
+    border: 1px solid #ef9a9a;
+}
+
+.stock-categories-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px; /* More space between cards */
-    margin-top: 30px;
-    justify-content: center;
-}
-
-.data-card {
-    background-color: var(--card-background);
-    border: 1px solid var(--border-color);
-    border-radius: 10px;
-    padding: 25px; /* More padding */
-    box-shadow: 0 3px 12px var(--shadow-color);
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.data-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 20px var(--shadow-color);
-}
-
-.data-card h2 {
-    font-size: 1.6em; /* Larger title */
-    color: var(--secondary-color);
-    margin-bottom: 10px;
-}
-
-.data-card .value {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.5em; /* Larger value */
-    font-weight: 700;
-    color: var(--heading-color);
-    margin-bottom: 5px;
-    text-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
-}
-
-.data-card .change {
-    font-size: 1.2em; /* Larger change text */
-    font-weight: 600;
-    transition: color 0.3s ease;
-}
-
-.data-card .change.positive {
-    color: var(--positive-change);
-}
-
-.data-card .change.negative {
-    color: var(--negative-change);
-}
-
-.last-updated {
-    margin-top: 30px;
-    font-size: 0.95em;
-    color: rgba(255, 255, 255, 0.7); /* Lighter text */
-}
-
-.disclaimer {
+    gap: 30px;
     margin-top: 40px;
-    font-size: 0.9em;
-    color: rgba(255, 255, 255, 0.6);
-    padding: 0 20px;
-    border-top: 1px dashed var(--border-color);
-    padding-top: 20px;
 }
 
-/* Back Home Button Section */
+.stock-category {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    padding: 25px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.stock-category h2 {
+    font-size: 1.6em;
+    color: #7b2935;
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.stock-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 10px;
+    /* User's requested changes below */
+    background-color: #f0dddf; /* This was moved from .project-card:nth-child(odd) */
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.stock-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    padding-top: 5px;
+    font-size: 0.95em;
+}
+
+.stock-item:last-child {
+    border-bottom: none;
+}
+
+.stock-item .symbol {
+    font-weight: 700;
+    color: #555;
+    flex-basis: 20%;
+    text-align: left;
+}
+
+.stock-item .name {
+    flex-grow: 1;
+    text-align: left;
+    margin-left: 10px;
+    color: #444;
+}
+
+.stock-item .price {
+    font-weight: 700;
+    color: #222;
+    margin-left: 10px;
+    flex-basis: 25%;
+    text-align: right;
+}
+
+.stock-item .change {
+    font-weight: 600;
+    margin-left: 15px;
+    flex-basis: 25%;
+    text-align: right;
+}
+
+.change.positive-change {
+    color: #28a745;
+}
+
+.change.negative-change {
+    color: #dc3545;
+}
+
+/* Back to Home Button Section */
 .back-home {
     text-align: center;
-    margin-top: 40px;
+    margin-top: 30px;
+    margin-bottom: 80px;
 }
 
-/* Footer */
+.back-home .button {
+    display: inline-block;
+    padding: 12px 25px;
+    background-color: #7b2935;
+    color: #fff;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.back-home .button:hover {
+    background-color: #a04351;
+    transform: translateY(-2px);
+}
+
+/* Footer Styles */
 footer {
+    background-color: #333;
+    color: #f4f4f4;
     text-align: center;
-    padding: 25px; /* More padding */
-    margin-top: 50px; /* More space above footer */
-    background: linear-gradient(to right, #1a242f, var(--primary-color));
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 0.95em;
-    border-radius: 0 0 12px 12px;
-    box-shadow: 0 -4px 15px var(--shadow-color);
+    padding: 30px 0;
+    margin-top: 50px;
+    font-size: 0.9em;
+}
+
+footer p {
+    margin-bottom: 15px;
+}
+
+.social-links {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.social-links a {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.social-links a:hover {
+    transform: translateY(-3px);
+}
+
+.social-links img {
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
 }
 
 /* Responsive Design */
 @media (max-width: 992px) {
-    .content {
-        padding: 20px 30px;
+    .two-by-two-grid-section {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        max-width: 90%;
+        padding: 20px;
     }
-    .hero h1 {
-        font-size: 3em;
+
+    .grid-cell {
+        min-height: 250px;
+    }
+
+    .grid-cell h1 {
+        font-size: 1.8em;
+    }
+
+    .grid-cell p {
+        font-size: 0.9em;
+    }
+
+    .company-name {
+        font-size: 1.5em;
+        margin-left: 20px;
+    }
+
+    .fixed-header nav ul {
+        margin-right: 0;
+    }
+
+    .fixed-header nav ul li {
+        margin-left: 15px;
+    }
+
+    .fixed-header .social-links {
+        margin-right: 20px;
+    }
+
+    .future-projects {
+        padding: 25px;
+        margin-top: 80px;
+    }
+    .future-projects h1 {
+        font-size: 2em;
+    }
+    .future-projects .intro-paragraph,
+    .future-projects .closing-paragraph {
+        font-size: 1em;
+        padding: 0 10px;
+    }
+    .project-card {
+        padding: 20px;
+    }
+    .project-card h3 {
+        font-size: 1.6em;
+    }
+    .project-card p {
+        font-size: 0.95em;
+    }
+    .project-card h4 {
+        font-size: 1.1em;
+    }
+    .project-card ul li {
+        font-size: 0.9em;
+    }
+
+    .favorite-stocks {
+        padding: 25px;
+        margin-top: 80px;
+        max-width: 90%;
+    }
+    .favorite-stocks h1 {
+        font-size: 2em;
+    }
+    .favorite-stocks .intro-paragraph,
+    .favorite-stocks .disclaimer {
+        font-size: 1em;
+        padding: 0 10px;
+    }
+    .stock-categories-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    .stock-category {
+        padding: 20px;
+    }
+    .stock-category h2 {
+        font-size: 1.4em;
+    }
+    .stock-item {
+        font-size: 0.9em;
+        flex-wrap: wrap;
+    }
+    .stock-item .symbol, .stock-item .name {
+        flex-basis: 45%;
+    }
+    .stock-item .price, .stock-item .change {
+        flex-basis: 45%;
+        margin-top: 5px;
     }
 }
 
 @media (max-width: 768px) {
     .fixed-header {
         flex-direction: column;
-        padding: 10px 5%;
-        text-align: center;
+        padding-bottom: 10px;
+        align-items: center;
     }
 
     .company-name {
+        margin-left: 0;
         margin-bottom: 10px;
-        font-size: 1.6em;
     }
 
-    .social-links {
+    .fixed-header nav ul {
+        flex-wrap: wrap;
         justify-content: center;
-        gap: 15px;
+        margin-bottom: 10px;
     }
 
-    body {
-        padding-top: 110px; /* Adjust for stacked header */
+    .fixed-header nav ul li {
+        margin: 5px 10px;
+    }
+
+    .fixed-header .social-links {
+        margin-right: 0;
     }
 
     .content {
-        margin: 10px;
-        padding: 15px;
-        border-radius: 8px; /* Smaller radius on small screens */
+        padding-top: 150px;
     }
 
-    .hero {
-        padding: 40px 15px;
-        border-radius: 8px;
+    h2 {
+        font-size: 1.8em;
     }
 
-    .hero h1 {
-        font-size: 2.2em;
+    .about-us {
+        margin: 30px auto;
+        padding: 20px;
     }
 
-    .hero p {
-        font-size: 1.1em;
+    .grid-cell h1 {
+        font-size: 1.5em;
     }
 
-    .cta-buttons {
-        flex-direction: column;
-        gap: 15px;
+    .grid-cell p {
+        font-size: 0.85em;
     }
 
-    .button {
-        width: 90%;
-        margin: 0 auto;
+    .owner-bio {
+        margin-top: 80px;
+        padding: 25px;
+    }
+
+    .owner-bio h1 {
+        font-size: 2em;
+        margin-bottom: 20px;
+    }
+
+    .owner-pic {
+        width: 150px;
+        height: 150px;
+        margin-bottom: 25px;
+    }
+
+    .owner-bio p {
         font-size: 1em;
-        padding: 12px 25px;
+        padding: 0 10px;
     }
 
-    .market-data {
-        grid-template-columns: 1fr; /* Stack market cards on small screens */
+    .future-projects {
+        padding: 20px;
+        margin-top: 60px;
     }
-
-    .data-card h2 {
+    .future-projects h1 {
+        font-size: 1.8em;
+    }
+    .future-projects .intro-paragraph,
+    .future-projects .closing-paragraph {
+        font-size: 0.95em;
+        padding: 0 5px;
+    }
+    .project-card {
+        padding: 15px;
+    }
+    .project-card h3 {
         font-size: 1.4em;
     }
-
-    .data-card .value {
-        font-size: 2.2em;
+    .project-card p {
+        font-size: 0.9em;
+    }
+    .project-card h4 {
+        font-size: 1em;
+    }
+    .project-card ul li {
+        font-size: 0.85em;
     }
 
-    .owner-bio h1, .future-projects h1, .market-status h1 {
-        font-size: 2em;
-    }
-
-    .project-card, .data-card {
+    .favorite-stocks {
         padding: 20px;
-        border-radius: 8px;
+        margin-top: 60px;
     }
-
-    footer {
-        border-radius: 0 0 8px 8px;
-        padding: 20px;
+    .favorite-stocks h1 {
+        font-size: 1.8em;
+    }
+    .favorite-stocks .intro-paragraph,
+    .favorite-stocks .disclaimer {
+        font-size: 0.95em;
+        padding: 0 5px;
+    }
+    .stock-category {
+        padding: 15px;
+    }
+    .stock-category h2 {
+        font-size: 1.2em;
+    }
+    .stock-item {
+        font-size: 0.85em;
     }
 }
 
 @media (max-width: 480px) {
     .company-name {
-        font-size: 1.4em;
+        font-size: 1.3em;
     }
 
-    .social-links img {
-        width: 20px;
-        height: 20px;
+    .fixed-header nav ul li a {
+        padding: 6px 10px;
+        font-size: 0.9em;
     }
 
-    .hero h1 {
+    .grid-cell h1 {
+        font-size: 1.2em;
+    }
+
+    .grid-cell p {
+        font-size: 0.8em;
+    }
+
+    .owner-bio {
+        margin-top: 60px;
+        padding: 20px;
+    }
+
+    .owner-bio h1 {
         font-size: 1.8em;
     }
+
     .owner-pic {
-        width: 150px;
-        height: 150px;
+        width: 120px;
+        height: 120px;
+        margin-bottom: 20px;
+    }
+
+    .owner-bio p {
+        font-size: 0.95em;
+        text-align: left;
+    }
+
+    .future-projects h1 {
+        font-size: 1.6em;
     }
     .project-card h3 {
+        font-size: 1.2em;
+    }
+    .project-card p {
+        font-size: 0.85em;
+    }
+    .project-card h4 {
+        font-size: 0.95em;
+    }
+    .project-card ul li {
+        font-size: 0.8em;
+    }
+
+    .favorite-stocks h1 {
         font-size: 1.6em;
+    }
+    .stock-item {
+        font-size: 0.8em;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .stock-item .symbol, .stock-item .name,
+    .stock-item .price, .stock-item .change {
+        flex-basis: 100%;
+        text-align: left;
+        margin-left: 0;
+        margin-bottom: 2px;
+    }
+    .stock-item .price, .stock-item .change {
+        margin-top: 0;
     }
 }

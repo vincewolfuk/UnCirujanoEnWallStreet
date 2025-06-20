@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,50 +7,437 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:300,400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header class="fixed-header">
-        <div class="company-name">Un cirujano en Wall Street</div>
-        <nav class="social-links">
-            <a href="https://www.youtube.com/@albertolopezdelgado" target="_blank" aria-label="YouTube Channel"><img src="icons/youtube.png" alt="YouTube"></a>
-            <a href="https://www.instagram.com/albertolopezdelgado" target="_blank" aria-label="Instagram Profile"><img src="icons/instagram.png" alt="Instagram"></a>
-            <a href="mailto:info@yourcompany.com" aria-label="Email Us"><img src="icons/email.png" alt="Email"></a>
+        <a href="index.html" class="company-name-link">
+            <div class="company-name">Un cirujano en Wall Street</div>
+        </a>
+        <nav>
+            <ul>
+                <li><a href="owner.html" class="button">Conozca a Nuestro Fundador</a></li>
+                <li><a href="projects.html" class="button">Descubra Futuros Proyectos</a></li>
+                <li><a href="market.html" class="button">Panorama Actual del Mercado</a></li>
+            </ul>
         </nav>
     </header>
 
     <main class="content">
-        <section class="market-status">
-            <h1>Panorama Actual del Mercado</h1>
-            <p>Esta sección ofrece una visión simplificada de los principales indicadores del mercado global. Para obtener datos completos y en tiempo real, es esencial la integración con una API de datos financieros. A continuación, se presenta un ejemplo simulado para demostrar el concepto.</p>
+        <section class="favorite-stocks">
+            <h1>Nuestras Acciones Destacadas y Populares</h1>
+            <!-- Párrafo introductorio actualizado -->
+            <p class="intro-paragraph">Aquí te presentamos una selección de acciones que nos gustan o son comunes, divididas por sectores clave. Estos datos corresponden a los **precios de cierre del día de trading anterior**, obtenidos de una API externa y se actualizan periódicamente.</p>
 
-            <div class="market-data">
-                <div class="data-card">
-                    <h2>Promedio Industrial Dow Jones (DJIA)</h2>
-                    <p class="value" id="djia-value">39,123.45</p>
-                    <p class="change" id="djia-change">+150.23 (+0.38%)</p>
+            <div id="loading-message" class="loading-message">Cargando datos del mercado...</div>
+            <div id="error-message" class="error-message"></div>
+
+            <div class="stock-categories-container">
+
+                <div class="stock-category">
+                    <h2>Las 10 Acciones Más Populares del Mundo</h2>
+                    <div class="stock-list">
+                        <div class="stock-item" data-symbol="AAPL">
+                            <span class="symbol">AAPL</span>
+                            <span class="name">Apple Inc.</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="MSFT">
+                            <span class="symbol">MSFT</span>
+                            <span class="name">Microsoft Corp.</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="GOOGL">
+                            <span class="symbol">GOOGL</span>
+                            <span class="name">Alphabet Inc. (Google)</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="AMZN">
+                            <span class="symbol">AMZN</span>
+                            <span class="name">Amazon.com Inc.</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="NVDA">
+                            <span class="symbol">NVDA</span>
+                            <span class="name">NVIDIA Corp.</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="TSLA">
+                            <span class="symbol">TSLA</span>
+                            <span class="name">Tesla Inc.</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="META">
+                            <span class="symbol">META</span>
+                            <span class="name">Meta Platforms Inc.</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="BRK.B">
+                            <span class="symbol">BRK.B</span>
+                            <span class="name">Berkshire Hathaway Inc.</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="JPM">
+                            <span class="symbol">JPM</span>
+                            <span class="name">JPMorgan Chase & Co.</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="V">
+                            <span class="symbol">V</span>
+                            <span class="name">Visa Inc.</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                    </div>
                 </div>
-                <div class="data-card">
-                    <h2>S&P 500</h2>
-                    <p class="value" id="sp500-value">5,321.67</p>
-                    <p class="change" id="sp500-change">-25.89 (-0.48%)</p>
+
+                <div class="stock-category">
+                    <h2>Manufactura e Industria</h2>
+                    <div class="stock-list">
+                        <div class="stock-item" data-symbol="HON">
+                            <span class="symbol">HON</span>
+                            <span class="name">Honeywell International Inc.</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="GE">
+                            <span class="symbol">GE</span>
+                            <span class="name">General Electric Co.</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="MMM">
+                            <span class="symbol">MMM</span>
+                            <span class="name">3M Company</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="CAT">
+                            <span class="symbol">CAT</span>
+                            <span class="name">Caterpillar Inc.</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="BA">
+                            <span class="symbol">BA</span>
+                            <span class="name">The Boeing Company</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="DE">
+                            <span class="symbol">DE</span>
+                            <span class="name">Deere & Company</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="UPS">
+                            <span class="symbol">UPS</span>
+                            <span class="name">United Parcel Service Inc.</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="LMT">
+                            <span class="symbol">LMT</span>
+                            <span class="name">Lockheed Martin Corp.</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="GD">
+                            <span class="symbol">GD</span>
+                            <span class="name">General Dynamics Corp.</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="RTX">
+                            <span class="symbol">RTX</span>
+                            <span class="name">RTX Corporation</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                    </div>
                 </div>
-                <div class="data-card">
-                    <h2>NASDAQ Composite</h2>
-                    <p class="value" id="nasdaq-value">16,987.90</p>
-                    <p class="change" id="nasdaq-change">+75.12 (+0.44%)</p>
+
+                <div class="stock-category">
+                    <h2>Metales Preciosos y Recursos</h2>
+                    <div class="stock-list">
+                        <div class="stock-item" data-symbol="NEM">
+                            <span class="symbol">NEM</span>
+                            <span class="name">Newmont Corp.</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <!-- CAMBIO REALIZADO AQUÍ: Barrick Gold Corp. reemplazado por Agnico Eagle Mines -->
+                        <div class="stock-item" data-symbol="AEM">
+                            <span class="symbol">AEM</span>
+                            <span class="name">Agnico Eagle Mines Ltd.</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="PAAS">
+                            <span class="symbol">PAAS</span>
+                            <span class="name">Pan American Silver Corp.</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="RIO">
+                            <span class="symbol">RIO</span>
+                            <span class="name">Rio Tinto PLC</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="BHP">
+                            <span class="symbol">BHP</span>
+                            <span class="name">BHP Group Ltd.</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="FCX">
+                            <span class="symbol">FCX</span>
+                            <span class="name">Freeport-McMoRan Inc.</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="ARNC">
+                            <span class="symbol">ARNC</span>
+                            <span class="name">Arconic Corp.</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="VALE">
+                            <span class="symbol">VALE</span>
+                            <span class="name">Vale S.A.</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="GLNCY">
+                            <span class="symbol">GLNCY</span>
+                            <span class="name">Glencore PLC</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="MOS">
+                            <span class="symbol">MOS</span>
+                            <span class="name">The Mosaic Company</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                    </div>
                 </div>
-                <div class="data-card">
-                    <h2>FTSE 100</h2>
-                    <p class="value" id="ftse100-value">8,154.32</p>
-                    <p class="change" id="ftse100-change">-10.50 (-0.13%)</p>
+
+                <div class="stock-category">
+                    <h2>Tecnología y Ciencia</h2>
+                    <div class="stock-list">
+                        <div class="stock-item" data-symbol="SMCI">
+                            <span class="symbol">SMCI</span>
+                            <span class="name">Super Micro Computer Inc.</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="ADBE">
+                            <span class="symbol">ADBE</span>
+                            <span class="name">Adobe Inc.</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="CRM">
+                            <span class="symbol">CRM</span>
+                            <span class="name">Salesforce Inc.</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="INTC">
+                            <span class="symbol">INTC</span>
+                            <span class="name">Intel Corporation</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="QCOM">
+                            <span class="symbol">QCOM</span>
+                            <span class="name">QUALCOMM Inc.</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="AMD">
+                            <span class="symbol">AMD</span>
+                            <span class="name">Advanced Micro Devices Inc.</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="IBM">
+                            <span class="symbol">IBM</span>
+                            <span class="name">International Business Machines Corp.</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="ORCL">
+                            <span class="symbol">ORCL</span>
+                            <span class="name">Oracle Corporation</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="SAP">
+                            <span class="symbol">SAP</span>
+                            <span class="name">SAP SE</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="TXN">
+                            <span class="symbol">TXN</span>
+                            <span class="name">Texas Instruments Inc.</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                    </div>
                 </div>
+
+                <div class="stock-category">
+                    <h2>Bienes y Servicios de Consumo</h2>
+                    <div class="stock-list">
+                        <div class="stock-item" data-symbol="WMT">
+                            <span class="symbol">WMT</span>
+                            <span class="name">Walmart Inc.</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="KO">
+                            <span class="symbol">KO</span>
+                            <span class="name">The Coca-Cola Company</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="PG">
+                            <span class="symbol">PG</span>
+                            <span class="name">Procter & Gamble Co.</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="NKE">
+                            <span class="symbol">NKE</span>
+                            <span class="name">NIKE Inc.</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="HD">
+                            <span class="symbol">HD</span>
+                            <span class="name">The Home Depot Inc.</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="MCD">
+                            <span class="symbol">MCD</span>
+                            <span class="name">McDonald's Corp.</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="SBUX">
+                            <span class="symbol">SBUX</span>
+                            <span class="name">Starbucks Corp.</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="COST">
+                            <span class="symbol">COST</span>
+                            <span class="name">Costco Wholesale Corp.</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="CMG">
+                            <span class="symbol">CMG</span>
+                            <span class="name">Chipotle Mexican Grill Inc.</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="BABA">
+                            <span class="symbol">BABA</span>
+                            <span class="name">Alibaba Group Holding Ltd.</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stock-category">
+                    <h2>Salud y Farmacia</h2>
+                    <div class="stock-list">
+                        <div class="stock-item" data-symbol="JNJ">
+                            <span class="symbol">JNJ</span>
+                            <span class="name">Johnson & Johnson</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="PFE">
+                            <span class="symbol">PFE</span>
+                            <span class="name">Pfizer Inc.</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="LLY">
+                            <span class="symbol">LLY</span>
+                            <span class="name">Eli Lilly and Company</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="UNH">
+                            <span class="symbol">UNH</span>
+                            <span class="name">UnitedHealth Group Inc.</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="MRK">
+                            <span class="symbol">MRK</span>
+                            <span class="name">Merck & Co. Inc.</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="ABBV">
+                            <span class="symbol">ABBV</span>
+                            <span class="name">AbbVie Inc.</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="DHR">
+                            <span class="symbol">DHR</span>
+                            <span class="name">Danaher Corporation</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="SYK">
+                            <span class="symbol">SYK</span>
+                            <span class="name">Stryker Corporation</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="GILD">
+                            <span class="symbol">GILD</span>
+                            <span class="name">Gilead Sciences Inc.</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                        <div class="stock-item" data-symbol="BIIB">
+                            <span class="symbol">BIIB</span>
+                            <span class="name">Biogen Inc.</span>
+                            <span class="price">Cargando...</span>
+                            <span class="change"></span>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
-            <p class="last-updated">Última actualización: <span id="update-time"></span></p>
+            <p class="last-updated">Última actualización: <span id="update-time">No disponible</span></p>
             <button class="button refresh-button" id="refresh-market-data">Actualizar Datos</button>
 
-            <p class="disclaimer">Descargo de responsabilidad: Los datos presentados aquí son ilustrativos y no en tiempo real. Para obtener datos de mercado reales y actualizados al minuto, consulte servicios financieros profesionales o proveedores de datos dedicados. Los datos de mercado suelen tener un retraso, a menos que la fuente indique lo contrario.</p>
+            <!-- Descargo de responsabilidad actualizado -->
+            <p class="disclaimer">Descargo de responsabilidad: Los datos presentados aquí son **precios de cierre del día de trading anterior** y se obtienen de un servicio API gratuito. Pueden tener **retrasos y no son en tiempo real**. Están diseñados únicamente con fines demostrativos y **no deben utilizarse para tomar decisiones de inversión reales**. Para obtener datos de mercado fiables y actualizados al minuto, consulte servicios financieros profesionales o proveedores de datos de pago dedicados.</p>
         </section>
         <section class="back-home">
             <a href="index.html" class="button">Volver al Inicio</a>
@@ -58,7 +445,12 @@
     </main>
 
     <footer>
-        <p>&copy; Un cirujano en Wall Street. All rights reserved.</p>
+        <p>© 2025 Un cirujano en Wall Street. All rights reserved.</p>
+        <div class="social-links">
+             <a href="https://www.youtube.com/@yourchannel" target="_blank" aria-label="YouTube" title="Visita nuestro canal de YouTube"><img src="icons/youtube.png" alt="YouTube"></a>
+            <a href="https://www.instagram.com/albertolopezdelgado" target="_blank" aria-label="Instagram" title="Visita nuestro perfil de Instagram"><img src="icons/instagram.png" alt="Instagram"></a>
+            <a href="mailto:info@yourcompany.com" aria-label="Email" title="Envíanos un correo electrónico"><img src="icons/email.png" alt="Email"></a>
+        </div>
     </footer>
 
     <script src="script.js"></script>

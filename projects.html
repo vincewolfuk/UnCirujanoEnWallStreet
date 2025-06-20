@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,26 +7,31 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:300,400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header class="fixed-header">
-        <div class="company-name">Un cirujano en Wall Street</div>
-        <nav class="social-links">
-            <a href="https://www.youtube.com/@albertolopezdelgado" target="_blank" aria-label="YouTube Channel"><img src="icons/youtube.png" alt="YouTube"></a>
-            <a href="https://www.instagram.com/albertolopezdelgado" target="_blank" aria-label="Instagram Profile"><img src="icons/instagram.png" alt="Instagram"></a>
-            <a href="mailto:info@yourcompany.com" aria-label="Email Us"><img src="icons/email.png" alt="Email"></a>
+        <a href="index.html" class="company-name-link">
+            <div class="company-name">Un cirujano en Wall Street</div>
+        </a>
+        <nav>
+            <ul>
+                <li><a href="owner.html" class="button">Conozca a Nuestro Fundador</a></li>
+                <li><a href="projects.html" class="button">Descubra Futuros Proyectos</a></li>
+                <li><a href="market.html" class="button">Panorama Actual del Mercado</a></li>
+            </ul>
         </nav>
     </header>
 
     <main class="content">
         <section class="future-projects">
             <h1>Nuestros Futuros Emprendimientos</h1>
-            <p>En Un cirujano en Wall Street, la innovación es el corazón de todo lo que hacemos. Exploramos constantemente nuevas tecnologías y estrategias para mejorar su experiencia de inversión. Aquí le ofrecemos un vistazo de lo que tenemos en el horizonte, diseñado para mantenerlo a la vanguardia del panorama financiero:</p>
+            <p class="intro-paragraph">En Un cirujano en Wall Street, la innovación es el corazón de todo lo que hacemos. Exploramos constantemente nuevas tecnologías y estrategias para mejorar su experiencia de inversión. Aquí le ofrecemos un vistazo de lo que tenemos en el horizonte, diseñado para mantenerlo a la vanguardia del panorama financiero:</p>
 
             <div class="project-card">
                 <h3>Optimización de Cartera Impulsada por IA</h3>
                 <p>Desarrollamos un algoritmo avanzado de inteligencia artificial que analizará las tendencias del mercado en tiempo real, sus objetivos financieros personales y su tolerancia al riesgo para proporcionar recomendaciones de cartera dinámicamente optimizadas. Esto incluirá análisis predictivos para ayudar a anticipar los cambios del mercado y maximizar los retornos.</p>
+                <h4>Características Clave:</h4>
                 <ul>
                     <li>Evaluación y Gestión de Riesgos Personalizados</li>
                     <li>Estrategias Dinámicas de Asignación de Activos</li>
@@ -37,6 +42,7 @@
             <div class="project-card">
                 <h3>Seguimiento de Acciones Integrado con Blockchain</h3>
                 <p>Exploramos la integración de la tecnología blockchain para un seguimiento de la propiedad de las acciones más seguro, transparente e inmutable. Esta iniciativa innovadora tiene como objetivo reducir significativamente los gastos administrativos, eliminar discrepancias y aumentar la confianza en cada transacción, asegurando una integridad de datos sin igual.</p>
+                <h4>Características Clave:</h4>
                 <ul>
                     <li>Funciones de Seguridad Mejoradas y Prevención de Fraudes</li>
                     <li>Registros de Transacciones Transparentes e Inmutables</li>
@@ -47,6 +53,7 @@
             <div class="project-card">
                 <h3>Herramientas de Expansión de Mercado Global</h3>
                 <p>Lanzamos nuevas características y asociaciones estratégicas para proporcionar a nuestros clientes un acceso fluido y simplificado a una gama más amplia de mercados bursátiles internacionales. Esta iniciativa simplificará las inversiones transfronterizas, diversificará las oportunidades de cartera y le empoderará para capitalizar las tendencias económicas globales.</p>
+                <h4>Características Clave:</h4>
                 <ul>
                     <li>Soporte y Conversión Multidivisa</li>
                     <li>Plataformas Simplificadas para el Comercio Internacional</li>
@@ -54,7 +61,7 @@
                 </ul>
             </div>
 
-            <p>Nos comprometemos a mantener a nuestros clientes a la vanguardia de la tecnología financiera y las oportunidades del mercado, asegurando que tenga las mejores herramientas para tener éxito. ¡Manténgase atento para más actualizaciones emocionantes a medida que estos proyectos se desarrollen!</p>
+            <p class="closing-paragraph">Nos comprometemos a mantener a nuestros clientes a la vanguardia de la tecnología financiera y las oportunidades del mercado, asegurando que tenga las mejores herramientas para tener éxito. ¡Manténgase atento para más actualizaciones emocionantes a medida que estos proyectos se desarrollen!</p>
         </section>
         <section class="back-home">
             <a href="index.html" class="button">Volver al Inicio</a>
@@ -62,8 +69,14 @@
     </main>
 
     <footer>
-        <p>&copy; 2025 Un cirujano en Wall Street. All rights reserved.</p>
+        <p>© 2025 Un cirujano en Wall Street. All rights reserved.</p>
+        <div class="social-links">
+             <a href="https://www.youtube.com/@yourchannel" target="_blank" aria-label="YouTube" title="Visita nuestro canal de YouTube"><img src="icons/youtube.png" alt="YouTube"></a>
+            <a href="https://www.instagram.com/albertolopezdelgado" target="_blank" aria-label="Instagram" title="Visita nuestro perfil de Instagram"><img src="icons/instagram.png" alt="Instagram"></a>
+            <a href="mailto:info@yourcompany.com" aria-label="Email" title="Envíanos un correo electrónico"><img src="icons/email.png" alt="Email"></a>
+        </div>
     </footer>
+
     <script src="script.js"></script>
 </body>
 </html>

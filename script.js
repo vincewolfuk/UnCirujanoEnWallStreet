@@ -1,146 +1,117 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Check if we are on the market.html page by checking for specific elements or a body class
-    // Add a class "market-page" to the body of market.html for robust targeting
-    if (document.body.classList.contains('market-page')) {
-        updateMarketData(); // Initial load when page loads
+    // Tu clave API de Financial Modeling Prep (FMP)
+    const FMP_API_KEY = "nK7ZO4aVrrmKFhpqJEIFsLV77xx6Kd8x"; 
 
-        const refreshButton = document.getElementById('refresh-market-data');
-        if (refreshButton) {
-            refreshButton.addEventListener('click', updateMarketData);
-        }
-    }
-});
-
-// Function to simulate market data update
-// In a real application, this would fetch data from an API
-function updateMarketData() {
-    const djiaValue = document.getElementById('djia-value');
-    const djiaChange = document.getElementById('djia-change');
-    const sp500Value = document.getElementById('sp500-value');
-    const sp500Change = document.getElementById('sp500-change');
-    const nasdaqValue = document.getElementById('nasdaq-value');
-    const nasdaqChange = document.getElementById('nasdaq-change');
-    const ftse100Value = document.getElementById('ftse100-value');
-    const ftse100Change = document.getElementById('ftse100-change');
+    const stockItems = document.querySelectorAll('.stock-item');
     const updateTimeSpan = document.getElementById('update-time');
+    const refreshButton = document.getElementById('refresh-market-data');
+    const loadingMessage = document.getElementById('loading-message');
+    const errorMessage = document.getElementById('error-message');
 
-    // Ensure elements exist before trying to update them
-    if (!djiaValue || !sp500Value || !nasdaqValue || !ftse100Value || !updateTimeSpan) {
-        console.warn("Market data elements not found. Are you on market.html?");
-        return;
+    // List of stock symbols to fetch (extracted from data-symbol attributes in HTML)
+    // Important: FMP uses uppercase symbols. Ensure your data-symbol in HTML is uppercase.
+    const stockSymbols = Array.from(stockItems).map(item => item.dataset.symbol);
+
+    // Function to fetch End-of-Day (EOD) data for a single stock from FMP
+    async function fetchEODData(symbol) {
+        // FMP's historical data endpoint for daily prices
+        // We request 2 data points to easily get yesterday's and the day before's close for change calculation
+        const url = `https://financialmodelingprep.com/api/v3/historical-price-full/${symbol}?apikey=${FMP_API_KEY}`;
+        try {
+            const response = await fetch(url);
+            if (!response.ok) {
+                // If response is not OK, try to read the error message from the body
+                const errorData = await response.json();
+                let errorMsg = `HTTP error! status: ${response.status}`;
+                if (errorData && errorData.error) {
+                    errorMsg += `: ${errorData.error}`;
+                } else if (errorData && errorData.note) { // FMP sometimes uses 'note' for limit messages
+                    errorMsg += `: ${errorData.note}`;
+                }
+                throw new Error(errorMsg);
+            }
+            const data = await response.json();
+
+            // FMP returns an object with a 'historical' array
+            if (data && data.historical && data.historical.length >= 2) {
+                // The most recent day is at index 0. The day before is at index 1.
+                const todayData = data.historical[0]; 
+                const yesterdayData = data.historical[1]; 
+
+                const price = parseFloat(todayData.close).toFixed(2);
+                // Calculate change from yesterday's close to today's close
+                const change = (todayData.close - yesterdayData.close).toFixed(2);
+                const changePercent = ((change / yesterdayData.close) * 100).toFixed(2);
+
+                const stockElement = document.querySelector(`.stock-item[data-symbol="${symbol}"]`);
+                if (stockElement) {
+                    stockElement.querySelector('.price').textContent = `${price}€`;
+
+                    const changeElement = stockElement.querySelector('.change');
+                    changeElement.textContent = `${change} (${changePercent}%)`;
+                    changeElement.classList.remove('positive-change', 'negative-change'); // Clear previous classes
+                    if (parseFloat(change) > 0) {
+                        changeElement.classList.add('positive-change');
+                    } else if (parseFloat(change) < 0) {
+                        changeElement.classList.add('negative-change');
+                    }
+                }
+                return { symbol, success: true };
+            } else {
+                // Handle cases where data structure is not as expected or not enough historical data
+                console.warn(`No valid historical data (or less than 2 days) for ${symbol} from FMP:`, data);
+                return { symbol, success: false, message: `No historical data available for ${symbol} or insufficient data points.` };
+            }
+        } catch (error) {
+            console.error(`Error fetching FMP EOD data for ${symbol}:`, error);
+            return { symbol, success: false, message: error.message };
+        }
     }
 
-    // --- Simulated Data Generation ---
-    const generateRandomChange = (currentValue) => {
-        // Generate a random percentage change between -0.5% and +0.5%
-        const percentChange = (Math.random() * 1 - 0.5).toFixed(2); // e.g., -0.50 to +0.50
-        const absoluteChange = (currentValue * (percentChange / 100)).toFixed(2);
-        const newValue = (parseFloat(currentValue) + parseFloat(absoluteChange)).toFixed(2);
-        return {
-            newValue: parseFloat(newValue),
-            absoluteChange: parseFloat(absoluteChange),
-            percentChange: parseFloat(percentChange)
-        };
-    };
+    // Function to update all stocks
+    async function updateAllStocks() {
+        loadingMessage.style.display = 'block'; // Show loading message
+        errorMessage.textContent = ''; // Clear previous error
+        errorMessage.style.display = 'none';
 
-    const updateIndexDisplay = (valueElement, changeElement, currentValue) => {
-        const data = generateRandomChange(currentValue);
-        valueElement.textContent = parseFloat(data.newValue).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-        
-        const changeText = `${data.absoluteChange > 0 ? '+' : ''}${parseFloat(data.absoluteChange).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} (${data.percentChange > 0 ? '+' : ''}${data.percentChange}%)`;
-        changeElement.textContent = changeText;
-        
-        // Apply color based on change (positive/negative)
-        changeElement.classList.remove('positive', 'negative');
-        if (data.absoluteChange > 0) {
-            changeElement.classList.add('positive');
-        } else if (data.absoluteChange < 0) {
-            changeElement.classList.add('negative');
+        const fetchedResults = [];
+        // FMP free tier limit is 250 requests/day.
+        // For 60 stocks, 60 requests are well within the limit for one daily update.
+        // We'll add a small delay to avoid too many simultaneous requests which can sometimes cause network issues,
+        // but it won't be as long as the Alpha Vantage one.
+        for (const symbol of stockSymbols) {
+            const result = await fetchEODData(symbol);
+            fetchedResults.push(result);
+            // Small delay to be polite to the API and prevent network congestion
+            await new Promise(resolve => setTimeout(resolve, 100)); // 100 ms delay between each stock fetch
         }
-    };
 
-    // Get current values from the DOM to make simulated changes relative
-    const currentDJIA = parseFloat(djiaValue.textContent.replace(/,/g, ''));
-    const currentSP500 = parseFloat(sp500Value.textContent.replace(/,/g, ''));
-    const currentNASDAQ = parseFloat(nasdaqValue.textContent.replace(/,/g, ''));
-    const currentFTSE100 = parseFloat(ftse100Value.textContent.replace(/,/g, ''));
+        loadingMessage.style.display = 'none'; // Hide loading message
 
-    // Update each index
-    updateIndexDisplay(djiaValue, djiaChange, currentDJIA);
-    updateIndexDisplay(sp500Value, sp500Change, currentSP500);
-    updateIndexDisplay(nasdaqValue, nasdaqChange, currentNASDAQ);
-    updateIndexDisplay(ftse100Value, ftse100Change, currentFTSE100);
+        const failedFetches = fetchedResults.filter(r => !r.success);
+        if (failedFetches.length > 0) {
+            const symbolsFailed = failedFetches.map(f => f.symbol).join(', ');
+            errorMessage.textContent = `Error al actualizar algunas acciones. Es posible que se haya alcanzado el límite de solicitudes de la API o que haya otros problemas.`;
+            errorMessage.style.display = 'block';
+        }
 
-    // Update timestamp
-    const now = new Date();
-    updateTimeSpan.textContent = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        const now = new Date();
+        updateTimeSpan.textContent = now.toLocaleString('es-ES', {
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric'
+        });
+    }
 
-    console.log("Market data refreshed (simulated).");
+    // Initial load of data when the page loads
+    updateAllStocks();
 
-    /*
-    // --- CONCEPT FOR REAL API INTEGRATION (Requires an API Key and Backend Proxy for Production) ---
-    // This section is commented out because direct client-side API calls to financial data
-    // APIs often lead to CORS issues and, more critically, expose your API key to the public.
-    // For a production environment, you would typically use a server-side proxy to fetch data.
+    // Attach event listener to the refresh button
+    refreshButton.addEventListener('click', updateAllStocks);
 
-    // Example using a hypothetical API (e.g., Alpha Vantage, IEX Cloud, Finnhub, etc.)
-    // You would sign up for an account with a financial data provider to get an API key.
-
-    // const API_KEY = 'YOUR_ACTUAL_API_KEY'; // REPLACE THIS WITH YOUR REAL API KEY
-    // const SYMBOLS = ['^DJI', 'SPY', 'QQQ', '^FTSE']; // Example symbols for indices or ETFs
-
-    // const fetchRealMarketData = async (symbol, valueElement, changeElement) => {
-    //     try {
-    //         // In a real scenario, you'd call YOUR OWN BACKEND endpoint here, e.g.:
-    //         // const response = await fetch(`/api/market-data?symbol=${symbol}`);
-    //         // Your backend would then call the external API (e.g., Alpha Vantage) securely.
-
-    //         // For a very simple client-side example (may have CORS issues/expose key):
-    //         // const response = await fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${symbol}&apikey=${API_KEY}`);
-    //         // const data = await response.json();
-
-    //         // console.log(`Data for ${symbol}:`, data); // Inspect the data structure
-
-    //         // You would then parse the actual data returned by the API
-    //         // This is highly dependent on the API's response structure.
-    //         // Example for Alpha Vantage Global Quote:
-    //         // if (data && data['Global Quote']) {
-    //         //     const quote = data['Global Quote'];
-    //         //     const price = parseFloat(quote['05. price']).toFixed(2);
-    //         //     const change = parseFloat(quote['09. change']).toFixed(2);
-    //         //     const changePercent = parseFloat(quote['10. change percent'].replace('%', '')).toFixed(2);
-
-    //         //     valueElement.textContent = parseFloat(price).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    //         //     const changeText = `${change > 0 ? '+' : ''}${parseFloat(change).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} (${changePercent > 0 ? '+' : ''}${changePercent}%)`;
-    //         //     changeElement.textContent = changeText;
-
-    //         //     changeElement.classList.remove('positive', 'negative');
-    //         //     if (change > 0) {
-    //         //         changeElement.classList.add('positive');
-    //         //     } else if (change < 0) {
-    //         //         changeElement.classList.add('negative');
-    //         //     }
-    //         // } else {
-    //         //     console.error(`Could not get data for ${symbol}. API response:`, data);
-    //         // }
-
-    //     } catch (error) {
-    //         console.error(`Error fetching real data for ${symbol}:`, error);
-    //         // Optionally update UI to show error (e.g., "Data N/A")
-    //     }
-    // };
-
-    // // Call the real data fetcher for each index
-    // fetchRealMarketData('^DJI', djiaValue, djiaChange);
-    // fetchRealMarketData('SPY', sp500Value, sp500Change); // Using SPY (S&P 500 ETF) as ^GSPC might be limited
-    // fetchRealMarketData('QQQ', nasdaqValue, nasdaqChange); // Using QQQ (Nasdaq 100 ETF) as ^IXIC might be limited
-    // fetchRealMarketData('^FTSE', ftse100Value, ftse100Change);
-
-    // updateTimeSpan.textContent = new Date().toLocaleTimeString('en-GB');
-    */
-}
-
-// Add a class to the body of market.html to easily target it with JavaScript
-if (window.location.pathname.includes('market.html')) {
-    document.body.classList.add('market-page');
-}
+    // Optional: Auto-refresh. Consider setting this to a longer interval for EOD data, e.g., once a day.
+    // setInterval(updateAllStocks, 24 * 60 * 60 * 1000); // Refresh every 24 hours (for EOD data)
+});
